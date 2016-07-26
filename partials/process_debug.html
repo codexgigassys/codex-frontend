@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Process
+  </div>
+  <div class="panel-body">
+    <form method="POST" class="form-horizontal" action="http://127.0.0.1:8080/api/v1/process_debug" ng-submit="process_file()" name="process_file_form">
+      <div class="form-group">
+        <label class="col-md-1 control-label">Hash: </label>
+        <div class="col-md-11">
+          <textarea class="form-control" rows="10" name="file_hash" ng-model="sha1"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-md-offset-1">
+          <input class="btn btn-primary" type="submit" value="Process" />
+        </div>
+      </div>
+      <div class="form-group">
+        <pre ng-if="process_response.length != 0">{{process_response}}</pre>
+        <div class="col-md-6"></div>
+      </div>
+    </form>
+  </div>
+</div>

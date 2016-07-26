@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Load
+  </div>
+  <div class="panel-body">
+		<form method="POST" class="form-horizontal" target="http://localhost:8080/file/load" ng-submit="load_files()" name="load_files_form">
+			To load many files at once into the database, move them to files_to_load folder inside codex-backend and click Load.
+			<div class="form-group">
+        <label class="col-md-5 control-label">Number of files to load: </label>
+      </div>
+      <div class="form-group">
+        <label class="col-md-5 control-label">{{  number_of_files_to_load }}</label>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-md-offset-1">
+          <input class="btn btn-primary"  type="submit" value="Load" />
+        </div>
+      </div>
+      <div class="form-group">
+        <pre ng-if="process_response.length != 0">{{load_response}}</pre>
+        <div class="col-md-6"></div>
+      </div>
+    </form>
+  </div>
+</div>

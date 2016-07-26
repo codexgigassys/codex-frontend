@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/angular-json-tree.css"> 
+    <link rel="stylesheet" href="css/collapsable-panel.css"> 
+    <link rel="stylesheet" href="css/jsondiff.css"> 
+    <!-- <link rel="stylesheet" href="https://rawgit.com/awendland/angular-json-tree/master/build/angular-json-tree.css">  -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/d3barchart.css">
+    <link rel="stylesheet" type="text/css" href="css/d3piechart.css">
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script> -->
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+    <script type="text/javascript" src="js/jsondiff.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/draganddrop.fork.js"></script>
+    <script type="text/javascript" src="js/angular-clipboard.js"></script>
+    <script type="text/javascript" src="js/angular-charthelper.js"></script>
+    <script type="text/javascript" src="js/angular-sanitize.js"></script>
+    <script type="text/javascript" src="js/select.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.min.js"></script> -->
+    <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script> -->
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+    <script src="js/ng-file-upload-bower/ng-file-upload-shim.min.js"></script>
+    <script src="js/ng-file-upload-bower/ng-file-upload.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery.fileDownload.js"></script>
+    <script src="js/json-tree.js"></script>
+    <script src="js/smart-table.min.js"></script>
+    <script src="js/ip.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/states.js"></script>
+    <script src="js/controllers/report_controller.js"></script>
+    <script src="js/controllers/malwarecheckup_controller.js"></script>
+    <script src="js/controllers/download_controller.js"></script>
+    <script src="js/controllers/home_controller.js"></script>
+    <script src="js/controllers/upload_controller.js"></script>
+    <script src="js/controllers/hash_controller.js"></script>
+    <script src="js/controllers/logs_controller.js"></script>
+    <script src="js/controllers/process_controller.js"></script>
+    <script src="js/controllers/load_controller.js"></script>
+    <script src="js/controllers/tree_controller.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> 
+    <!-- Locally does not work correctly. glyphicons are not loaded -->
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7">-->
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/select.min.css" />
+    <link rel="stylesheet" href="css/select2.css" />
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+    <script src="js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <title>Codex Gigas</title>
+  </head>
+  <body ng-app="myApp" class="ng-scope">
+    <div id="wrap" ng-controller="TreeController">
+      <script type="text/ng-template" id="tree_item_renderer.html">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{data.name}}</a>
+
+                <ul class="dropdown-menu">
+                <li ng-if="data.children.length != 0" class="menu-item dropdown dropdown-submenu" ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'"></li>
+                <li ng-if="data.children.length == 0" class="menu-item"  ng-click="new_search_click(data)" ng-repeat="data in data.children | filter:{searchable: true}" ng-include="'tree_item_renderer.html'"></li>
+                </ul>
+      </script>
+
+      <div class="navbar navbar-default " role="navigation">
+        <div class="container-fuild">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a ui-sref="home" style="padding-top: 0px;padding-bottom: 0px; padding-right: 5px">
+              <img src="img/icon-transparent.png" style="height: 50px">
+            </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" ng-if="show_search2 === false">
+              <li>
+                <a href="#" ng-click="show_search_stuff()">
+                  <span class="glyphicon glyphicon-search">
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <div ng-include="'partials/menu.html'"></div>
+          </div><!-- collapse -->
+        </div><!-- container-fluid -->
+      </div><!-- navbar -->
+      <div class="col-md-8" id="search-div-col">
+        <div id="search-div" ng-if="show_search2"><!-- search-div -->
+          <div ng-if="items.length != 0" class="panel panel-default">
+            <div class="panel-heading">Search
+              <span ng-click="expand_search_div()" id="expand_search_div_arrow" class="glyphicon glyphicon-resize-full pull-right"></span>
+              <span ng-click="collapse_search_div()" id="collapse_search_div_arrow" class="glyphicon glyphicon-resize-small pull-right" style="display: none"></span>
+            </div>
+            <div class="panel-body">
+              <form method="POST" class="form-horizontal" target="http://{{backendIp}}/api/v1/search" ng-submit="submit_search()" name="search_form" >
+                <div ng-repeat="item in items">
+                  <div class="form-group" id="formgroup-{{replace_dot_with_hyphen(item.id)}}">
+                    <label class="col-md-4 control-label col-sm-3 col-xs-12">{{item.name}}: </label>
+                    <div class="col-md-6 col-sm-8 col-xs-11">
+                      <input class="{{select_input_class(item)}}" type="{{item.type}}" name="{{item.id}}" placeholder="{{item.example}}" ng-model="formData[item.id]" data-test="{{item.call}}" ng-blur="lowercase(item.lower,replace_dot_with_hyphen(item.id))" ng-keyup="check_libimp(item.call_func,formData[item.id],item.id)" id="input-{{replace_dot_with_hyphen(item.id)}}">
+                    </div>
+                    <div class="col-md-2 col-sm-1 col-xs-1" style="padding-top: 8px; padding-left: 0">
+                      <a href="#" ng-if="item.multi == true" ng-click="add_the_same_item(item.id)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </a>
+                      <a href="#" ng-click="remove(item)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-4 control-label col-sm-3 col-xs-12">Attributes for results preview:</label>
+                  <div class="col-md-6 col-sm-8 col-xs-11">
+                    <ui-select multiple ng-model="itemArray.selected" >
+                      <ui-select-match placeholder="Select item..">
+                        {{$item.name}}
+                        <!--           <span ng-bind="select.selected.name"></span> -->
+                      </ui-select-match>
+                      <ui-select-choices repeat="item in (itemArray | filter: $select.search) track by item.id">
+                        <span ng-bind="item.name"></span>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-3">
+                    <input class="btn btn-primary ng-scope" ng-if="items.length != 0" type="submit" value="Search">
+                  </div>
+                  <label class="col-md-1 control-label col-sm-4 col-xs-12">Limit: </label> 
+                  <div class="col-md-2 col-sm-2 col-xs-12">
+                    <input class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" type="number" name="limit" placeholder="0" ng-model="formLimit[0]">
+                  </div>
+                  <div class="col-md-3 col-md-offset-0 col-sm-offset-3 col-sm-7">
+                    <label class="control-label">{{get_status}}</label>
+                  </div>
+                </div>
+                <div class="form-group" ng-if="get_status.length != 0">
+                  <div class="col-md-2" style="text-align: right">
+                    <img ng-if="loading_search_gif" src="img/loading.gif" alt="Loading">
+                  </div>
+                </div>
+              </form>
+              <div ng-if="hashes.length != 0">
+                <div>
+                  <label>
+                    <input type="checkbox" name="check-all" ng-model="check_all_model" ng-change="check_all_entries(search_results.records,check_all_model)" id="check_all" >Check all
+                  </label>
+                    <button type="button" class="btn btn-default" title="download" ng-click="query_selected_hashes('download')">
+                      <span class="glyphicon glyphicon-download"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" title="export" ng-click="query_selected_hashes('export')">
+                      <span class="glyphicon glyphicon-export"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" title="process" ng-click="process_selected_hashes()">
+                      <span class="glyphicon glyphicon-wrench"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" title="copy hashes" ng-click="copy_selected_hashes()">
+                      <span class="glyphicon glyphicon-copy"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" title="generate yara rule" ng-click="yara_selected_hashes()">{</button>
+                    <!--<button type="button" class="btn btn-default" title="IoC" ng-click="ioc_selected_hashes()">
+                      <span class="glyphicon glyphicon-scale"></span>
+                    </button> -->
+                    <span ng-if="checked_count > 0"> ({{checked_count}})</span>
+                    <div ng-if="button_response.length != 0">
+                      <p>{{button_response}}</p>
+                    </div>
+                    <div ng-if="yara_response.length != 0">
+                      <span class="glyphicon glyphicon-remove pull-right" ng-click="clear_yara_response()" style="margin-left: -15px"></span>
+                      <pre>{{yara_response}}</pre>
+                    </div>
+                </div>
+                <table st-table="displayedCollection" st-safe-src="search_results.records" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <td>
+                        <div st-pagination="" st-template="partials/pagination.custom.html" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                      </td>
+                      <td colspan="{{table_colspan(displayedCollection) }}" style="text-align: right">
+                        Items per page:
+                        <br>
+                        <input class="input-xs form-control ng-pristine ng-valid ng-touched pull-right" min="1" name="items" id="items" type="number" ng-model="itemsByPage" style="width: 70px">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th st-sort="{{name}}" ng-repeat="name in search_results.fieldsName">{{name}}</th>
+                    </tr>
+                    <tr>
+                      <td colspan="{{ table_colspan(displayedCollection) }}"><input st-search="" class="form-control" placeholder="filter" type="text"/></td>
+                    </tr>
+                  </thead>
+                  <tbody style="max-height: 500; overflow-y: scroll;">
+                    <tr ng-repeat="row in displayedCollection">
+                      <td ng-repeat="column in row  | sha1first:hashes_header track by $index">
+                        <div class="checkbox" ng-if="$index === 0">
+                          <label>
+                            <input type="checkbox" value="" ng-model="checkModel[column]" ng-click="print_checkmodel()" id="c-{{column}}" class="checkbox-results">
+                          </label> 
+                          <a ng-if="$index === 0" ui-draggable="true" drag="column" drop-channel="A"  drag-channel="A" on-drop-success="dropSuccessHandler($event,column)" class="monospaced" ng-click="go_to_bottom(column)" href="">
+                            {{column}}
+                          </a>
+                          <p ng-if="$index === 0" style="display: none" id="p-{{column}}">(copied)</p>
+                        </div>
+                        <div ng-if="$index != 0">{{column}}</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="0"  class="">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-template="partials/pagination.custom.html" st-displayed-pages="7">
+                        </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div><!-- hashes -->
+            </div><!--panel-body  -->
+          </div><!-- panel -->
+        </div><!-- search-div -->
+        <div id="new-search-results" ng-if="show_metadata_below_the_results && show_search2">
+          <div class="col-md-10">
+            <div ng-include="'partials/file_menu.html'"></div>
+            <div><small>{{process_file_response}}</small></div>
+            <json-tree object="hash_viewer.object" start-expanded="true"></json-tree>
+          </div>
+        </div>
+      </div><!-- col-md-8 --> 
+      <div class="col-md-4" id="right-side-blocks" ng-if="show_search2">
+				<div class="panel with-nav-tabs panel-default">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-resize-full pull-right" id="expand_charts_div_arrow" ng-click="expand_charts_div()"></span>
+						<span class="glyphicon glyphicon-resize-small pull-right" style="display: none" id="collapse_charts_div_arrow" ng-click="collapse_charts_div()"></span>
+						<ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#d3charts" data-toggle="tab">Charts</a>
+              </li>
+              <li>
+                <a href="#draganddrop" data-toggle="tab">Simple compare</a>
+              </li>
+            </ul>
+          </div>
+          <div class="panel-body">
+            <div class="tab-content panel-collapse collapse in" id="rightsideglobalts"> 
+              <div class="tab-pane fade in active" id="d3charts">
+                Timestamp chart 
+                <d3barchart id="d3barchart1" class="TimeDateStamp"></d3barchart>
+                Size chart
+                <d3barchart id="d3barchart2" class="size"></d3barchart>
+                Description
+                <d3piechart id="d3piechart1" class="description"></d3piechart>
+              </div>
+              <div class="tab-pane fade" id="draganddrop">
+                <div class="panel panel-default" ui-on-drop="onDrop(0,$data,men)" drag-channel="A" drop-channel="A">
+                  <div class="panel-blocks panel-heading">{{block_title[0]}}
+                    <a data-toggle="collapse" data-target="#block1" href="#block1" id="arrow-block1-collapse" ng-click="collapse_block('arrow-block1-collapse','arrow-block1-collapsed')" class="arrowblock">
+                      <span class="glyphicon glyphicon-triangle-bottom"></span>
+                    </a>
+                    <a data-toggle="collapse" data-target="#block1" href="#block1" id="arrow-block1-collapsed" ng-click="collapse_block('arrow-block1-collapsed','arrow-block1-collapse')" style="display: none" class="arrowblock">
+                      <span class="glyphicon glyphicon-triangle-left"></span>
+                    </a>
+                  </div>
+                  <div class="panel-collapse collpase in" id="block1">
+                    <div class="panel-body">
+                      <json-tree object="compare_window[0].object" start-expanded="true"></json-tree>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default" ui-on-drop="onDrop(1,$data,men)" drag-channel="A" drop-channel="A">
+                  <div class="panel-heading panel-blocks">{{block_title[1]}}
+                    <a data-toggle="collapse" data-target="#block2" href="#block2" id="arrow-block2-collapse" ng-click="collapse_block('arrow-block2-collapse','arrow-block2-collapsed')" class="arrowblock">
+                      <span class="glyphicon glyphicon-triangle-bottom"></span>
+                    </a>
+                    <a data-toggle="collapse" data-target="#block2" href="#block2" id="arrow-block2-collapsed" ng-click="collapse_block('arrow-block2-collapsed','arrow-block2-collapse')" style="display: none" class="arrowblock">
+                      <span class="glyphicon glyphicon-triangle-left"></span>
+                    </a>
+                  </div>
+                  <div class="panel-collapse collapse in" id="block2">
+                    <div class="panel-body">
+                      <json-tree object="compare_window[1].object" start-expanded="true"></json-tree>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel with-nav-tabs panel-default">
+                  <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a href="#tab1default" data-toggle="tab">Diff</a>
+                      </li>
+                      <li>
+                        <a href="#tab2default" data-toggle="tab">Equals</a>
+                      </li>
+                      <li>
+                        <a ng-click="execute_diff()">
+                          <span class="glyphicon glyphicon-refresh"></span>
+                        </a>
+                      </li>
+                      <li class="navbar-right">
+                        <a href="#diffequalspanel" data-target="#diffequalspanel" id="arrow-icon-non-collapse" data-toggle="collapse" ng-click="collapse_diff()" >
+                          <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        </a>
+                        <a href="#diffequalspanel" data-target="#diffequalspanel" id="arrow-icon-non-collapsed" data-toggle="collapse" ng-click="uncollapse_diff()" style="display: none">
+                          <span class="glyphicon glyphicon-triangle-left"></span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="panel-body">
+                    <div class="tab-content panel-collapse collapse in" id="diffequalspanel">
+                      <div class="tab-pane fade in active" id="tab1default">
+                        <div class="contentbox" id="results-diff"></div>
+                      </div>
+                      <div class="tab-pane fade" id="tab2default">
+                        <div class="contentbox" id="results-equals"></div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- newly added -->
+        </div>
+      </div>
+      <div ng-controller="HashController">
+        <div ui-view class="col-md-8 col-md-offset-2">
+        </div>
+      </div>
+    </div><!--id wrap treecontroller -->
+    <div id="footer">
+      <div class="container-fluid">
+        <div class="row" style="background-color: white">
+          <div class="col-lg-12">
+            <p align="center" id="footer-text">Copyright Ⓒ Deloitte V1.3
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<h1 id="fileh1">File 
+  <a href="{{get_download_url(hash_on_display)}}">
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-download"></span>
+    </button>
+  </a>
+  &nbsp; <button type="button" class="btn btn-default" ng-click="process_file_background()">
+    <span class="glyphicon glyphicon-wrench"></span>
+  </button>
+  <button type="button" class="btn btn-default" title="export" ng-click="query_selected_hashes('export',hash_on_display)">
+    <span class="glyphicon glyphicon-export"></span>
+  </button>
+  <button type="button" class="btn btn-default" title="get vitustotal scan" ng-click="scan_file_background()">VT scan data
+    <span class="glyphicon glyphicon-eye-open"></span>
+  </button>
+  <button type="button" class="btn btn-default" ng-click="go_to_malware_similarities(hash_on_display)">Malware Similarities</button>
+</h1>

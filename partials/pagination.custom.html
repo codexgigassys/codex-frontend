@@ -1,0 +1,9 @@
+<nav ng-if="pages.length >= 2" style="height: 36px">
+  <ul class="pagination">
+    <li><a ng-click="selectPage(1)">First</a>
+    </li><li><a ng-click="selectPage(currentPage - 1)">&lt;</a>
+    </li><li><a>{{currentPage}} of {{numPages}}</a>
+    </li><li><a ng-click="selectPage(currentPage + 1)">&gt;</a>
+    </li><li><a ng-click="selectPage(numPages)">Last</a></li>
+  </ul>
+</nav>

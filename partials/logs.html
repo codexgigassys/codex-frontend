@@ -1,0 +1,27 @@
+<h1>
+  Logs
+  <button type="button" ng-click="refresh_logs()" class="btn btn-default">{{refresh_status}}
+    <span class="glyphicon glyphicon-refresh"></span>
+  </button>
+</h1>
+<ul>
+  <div ng-repeat="event in hashes_logs">
+    <li>
+      {{event.datetime}}: 
+      <a ui-sref="metadata({hash: event.hash})">
+        {{event.hash}}
+      </a>
+      (
+      <a ng-if="event.message == 'report'" ui-sref="report({hash: event.hash})">
+        Report: {{event.comments}}
+      </a>
+      <span ng-if="event.message != 'report'">
+        {{event.message}}
+      </span>)
+    </li>
+  </div>
+</ul>
+<p ng-if="hashes_logs.length === 0">
+No logs
+</p>
+<hr />

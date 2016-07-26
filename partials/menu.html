@@ -1,0 +1,45 @@
+<ul class="nav navbar-nav"> 
+  <li class="menu-item dropdown">
+    <a href="search" class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
+    <ul class="dropdown-menu" ng-app="Application">
+      <li class="menu-item dropdown dropdown-submenu" ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+    </ul>
+  </li>
+</ul>
+<ul class="nav navbar-nav">
+  <li>
+    <a ui-sref="upload" ng-click="hide_search_stuff()">Upload</a>
+  </li>
+</ul>
+<ul class="nav navbar-nav">
+  <li>
+    <a ui-sref="logs" ng-click="hide_search_stuff()">Logs</a>
+  </li>
+</ul>
+<ul class="nav navbar-nav">
+  <li>
+    <a ui-sref="process" ng-click="hide_search_stuff()">Process</a>
+  </li>
+</ul>
+<ul class="nav navbar-nav">
+  <li>
+    <a ui-sref="load_to_mongo" ng-click="hide_search_stuff()">Load</a>
+  </li>
+</ul>
+<ul class="nav navbar-nav">
+  <li>
+    <a ui-sref="download" ng-click="hide_search_stuff()">Download</a>
+  </li>
+</ul>
+<ul class="nav navbar-nav">
+  <li>
+    <a>Count: {{count | number}} {{count_status}}</a>
+  </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+  <li>
+    <a ui-sref="home" style="padding-top: 7px;padding-bottom: 0px">
+      <img src="img/deloitte-transparent.png" style="height: 30px">
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Upload
+  </div>
+  <div class="panel-body">
+    <form method="POST" class="form-horizontal" target="http://localhost:8080/file/add" ng-submit="submit_file()" name="submit_form">
+      <div class="form-group">
+        <label class="col-md-4 control-label">File: </label>
+        <div class="col-md-6">
+          <input class="form-control" type="file" ngf-select="uploadFiles($file,$invalidFiles)"  ngf-max-size="10MB" name="file">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-4" style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+        </div>
+        <div class="col-md-6">
+          <span class="progress" ng-show="f.progress >= 0">
+            <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'"></div>
+          </span>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4" style="font:smaller">{{upload_response}}</div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4" style="font:smaller">{{errorMsg}}</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
