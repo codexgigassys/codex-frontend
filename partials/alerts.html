@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Alerts
+  </div>
+  <div class="panel-body">
+    <form method="POST" class="form-horizontal" target="http://localhost:8080/file/alerts" ng-submit="alerts_file()" name="alerts_file_form">
+      <div class="form-group">
+        <label class="col-md-2 control-label">Hash: </label>
+        <div class="col-md-10">
+          <textarea class="form-control" rows="10" ng-model="sha1"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">E-mail: </label>
+        <div class="col-md-6">
+          <input type="text" name="email"  class="malwaresimilarities" ng-model="email" value="" placeholder="email@example.com" required="">
+          <i ng-show="submit_form.email.$error.required">*required</i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Description: </label>
+        <div class="col-md-6">
+          <input type="text" name="email"  class="malwaresimilarities" ng-model="description" value="" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-md-offset-1">
+          <input class="btn btn-primary"  type="submit" value="Submit" />
+        </div>
+      </div>
+      <div class="form-group">
+        <pre ng-if="alerts_response.length != 0">{{alerts_response}}</pre>
+        <div class="col-md-6"></div>
+      </div>
+    </form>
+  </div>
+</div>

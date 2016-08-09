@@ -38,4 +38,9 @@ angular.module("myApp").config(function($stateProvider, $urlRouterProvider) {
     templateUrl: "partials/load.html",
     controller: "LoadController"
   })
+  .state('alerts',{
+    url: "/alerts",
+    templateUrl: "partials/alerts.html",
+    controller: "AlertsController"
+  })
 });
