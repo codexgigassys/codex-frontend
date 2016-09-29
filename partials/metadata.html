@@ -1,14 +1,5 @@
 <h1>
-  File
-  <a href="{{download_url}}">
-    <button type="button" class="btn btn-default">
-      <span class="glyphicon glyphicon-download">
-      </span>
-    </button>
-  </a>&nbsp; 
-  <button type="button" class="btn btn-default" ng-click="process_file_background()">
-    <span class="glyphicon glyphicon-wrench"></span>
-  </button>
+  <div ng-include="'partials/file_menu.html'"></div>
 </h1>
 <div>
   <small>{{process_file_response}}</small>
