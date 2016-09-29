@@ -1,4 +1,7 @@
-angular.module("myApp").controller("HashController",['$scope','$http','$stateParams','backendIp',function($scope,$http,$stateParams,backendIp){
+angular.module("myApp").controller("HashController",['$scope','$http','$stateParams','backendIp','$location',function($scope,$http,$stateParams,backendIp,$location){
+  if($location.path() != null && $location.path().substring(0,9) == "/metadata"){
+    $scope.hash_on_display = $location.path().substring(10,$location.path().length);
+  }
   $scope.params = $stateParams;
   this.backendIp=backendIp;
   $scope.process_file_response="";
@@ -23,7 +26,7 @@ angular.module("myApp").controller("HashController",['$scope','$http','$statePar
 
    //ToDo: Function partly repeated (this is also in TreeController)
   $scope.process_file_background = function(){
-    $scope.process_file_response = "Processing..."; 
+    $scope.process_file_response = "Processing...";
     $http({method: 'GET',url: "http://"+backendIp+"/api/v1/process",params: {'file_hash': $scope.params['hash']}}).then(function(response){
       $scope.process_file_response = response.data;
       $scope.process_file_response = $scope.process_file_response+". Refreshing metadata...";
@@ -32,6 +35,17 @@ angular.module("myApp").controller("HashController",['$scope','$http','$statePar
     });
   };
 
+  // ToDo: Function repeated
+  $scope.scan_file_background = function(){
+    hash=$scope.hash_on_display;
+    $scope.process_file_response = "Retrieving scan results from virtustotal.com ...";
+    $http({method: 'GET',url: "http://"+backendIp+"/api/v1/av_result",params: {'file_hash': hash}}).then(function(response){
+      $scope.process_file_response = response.data;
+      $scope.process_file_response = $scope.process_file_response+". Refreshing metadata...";
+      $scope.refresh_metadata(hash);
+      $scope.process_file_response ="ok";
+    });
+  };
 
 
 }]);
