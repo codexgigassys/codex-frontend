@@ -14,7 +14,7 @@ angular.module("myApp").config(function($stateProvider, $urlRouterProvider) {
     controller: "HomeController"
   })
   .state('process',{
-    url: "/process",
+    url: "/process/:task_id",
     templateUrl: "partials/process.html",
     controller: "ProcessController"
   })
