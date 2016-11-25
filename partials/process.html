@@ -2,7 +2,7 @@
   <div class="panel-heading">Process
   </div>
   <div class="panel-body">
-    <form method="POST" class="form-horizontal" target="http://localhost:8080/file/process" ng-submit="process_file()" name="process_file_form">
+    <form method="POST" class="form-horizontal" target="http://localhost:8080/file/do" ng-submit="process_file()" name="process_file_form">
       <div class="form-group">
         <label class="col-md-1 control-label">Hash: </label>
         <div class="col-md-11">
@@ -10,14 +10,38 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-md-9 col-md-offset-1">
-          <input class="btn btn-primary"  type="submit" value="Process" />
+        <div class="checkbox">
+          <label><input type="checkbox" name="process" ng-model="process" value="">Process</label>
         </div>
       </div>
       <div class="form-group">
-        <pre ng-if="process_response.length != 0">{{process_response}}</pre>
-        <div class="col-md-6"></div>
+        <div class="checkbox">
+          <label><input type="checkbox" name="vt_av" ng-model="vt_av" value="">Download VT scans</label>
+        </div>
       </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label><input type="checkbox" name="vt_samples" ng-model="vt_samples" value="">Download samples from VT if you are not found in the local DB.</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Email me when the task ends:</label>
+        <div class="col-md-8">
+          <input type="text" name="email" ng-model="email" value="" placeholder="email@example.net"></label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Document name: </label>
+        <div class="col-md-8">
+          <input type="text" name="document_name" ng-model="document_name">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-md-offset-1">
+          <input class="btn btn-primary"  type="submit" value="Create task" />
+        </div>
+      </div>
+      <div ng-include="'partials/task_report.html'"></div>
     </form>
   </div>
 </div>

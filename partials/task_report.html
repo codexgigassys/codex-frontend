@@ -1,0 +1,40 @@
+<div class="panel panel-default ng-scope">
+  <div class="panel-heading">Results
+    <a ng-click="get_task_report()">
+      <span class="glyphicon glyphicon-refresh pull-right"></span>
+    </a>
+  </div>
+  <div class="panel-body">
+    <div class="form-group" ng-hide="date_enqueued == ''">
+      <b>Date enqueued:</b> {{date_enqueued}}
+    </div>
+    <div class="form-group" ng-hide="date_start == ''">
+      <b>Date start:</b> {{date_start}}
+    </div>
+    <div class="form-group" ng-hide="date_end == ''">
+      <b>Date end:</b> {{date_end}}
+    </div>
+    <div class="form-group" ng-hide="document_name_r == ''">
+      <b>Document name:</b> {{document_name_r}}
+    </div>
+    <div class="form-group" ng-hide="processed.length == 0">
+      <ul class="list-group"><b>Processed:</b>
+        <li class="list-group-item" ng-repeat="p in processed">{{ p.hash }} ({{p.seconds}} seconds)</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="not_found.length == 0 || not_found == undefined">
+      <ul class="list-group"><b>Not found:</b>
+        <li class="list-group-item" ng-repeat="p in not_found">{{ p }}</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="downloaded.length == 0 || downloaded == undefined">
+      <ul class="list-group"><b>Downloaded:</b>
+        <li class="list-group-item" ng-repeat="p in downloaded">{{ p }}</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="task_id == ''">
+      <b>Task id:</b> {{task_id}}
+    </div>
+  </div>
+</div>
+</div>
