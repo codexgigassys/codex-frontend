@@ -333,6 +333,15 @@ angular.module("myApp").controller("TreeController", ['$scope','$http','$interva
 
   $scope.count_status="(loading...)";
   $scope.count="";
+  $scope.count_tasks="";
+  $http.get("http://"+backendIp+"/api/v1/queue_count").then(function(response){
+    var tmp_response = response.data;
+    $scope.count_tasks = tmp_response["count"];
+  });
+  $interval(function(){$http.get("http://"+backendIp+"/api/v1/queue_count").then(function(response){
+    var tmp_response = response.data;
+    $scope.count_tasks = tmp_response["count"];
+  })},50000);
   $http.get("http://"+backendIp+"/api/v1/samples").then(function(response){
     var tmp_response = response.data;
     $scope.count = tmp_response["count"];
