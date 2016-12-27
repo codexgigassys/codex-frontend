@@ -10,6 +10,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
   $scope.process = true;
   $scope.process_response="";
   $scope.processed=[];
+  $scope.task_errors=[];
   $scope.not_found=[];
   $scope.downloaded=[];
   $scope.task_id = "";
@@ -62,6 +63,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
 
   process_task_data = function(task_data){
           $scope.processed = task_data["processed"];
+          $scope.task_errors = task_data["errors"];
           $scope.not_found = task_data["not_found"];
           $scope.downloaded = task_data["downloaded"];
           $scope.task_id = task_data["task_id"];
@@ -77,7 +79,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
       });
   };
 
-  if($scope.params["task_id"] !== ""){
+  if($scope.params["task_id"] !== "" && $scope.params["task_id"] !== undefined ){
       $scope.get_task_report(true);
   }
 
@@ -86,7 +88,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
   },2000);
 
   $scope.inter_func = function(){
-      if($scope.params['task_id'] !== "" && !$scope.got_result){
+      if($scope.params['task_id'] !== "" && $scope.params['task_id'] !== undefined && !$scope.got_result){
           finished_return = $scope.check_if_finished($scope.has_finished);
           if($scope.has_finished){
             $scope.get_task_report();
