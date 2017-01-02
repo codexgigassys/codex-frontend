@@ -71,6 +71,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
           $scope.date_start = task_data["date_start"];
           $scope.date_end = task_data["date_end"];
           $scope.date_enqueued = task_data["date_enqueued"];
+          $scope.hashes = task_data["hashes"];
   };
 
   $scope.check_if_finished = function(has_finished){

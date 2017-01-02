@@ -17,6 +17,9 @@
     <div class="form-group" ng-hide="document_name_r == ''">
       <b>Document name:</b> {{document_name_r}}
     </div>
+    <div class="form-group" ng-hide="hashes == ''">
+      <b>Hashes:</b> {{hashes.length}}
+    </div>
     <div class="form-group" ng-hide="processed.length == 0">
       <ul class="list-group"><b>Processed ({{processed.length}}):</b>
         <li class="list-group-item" ng-repeat="p in processed">{{ p.hash }} ({{p.seconds}} seconds)</li>
