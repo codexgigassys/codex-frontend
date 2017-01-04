@@ -20,7 +20,7 @@
     <div class="form-group" ng-hide="hashes == ''">
       <b>Hashes:</b> {{hashes.length}}
     </div>
-    <div class="form-group" ng-hide="inconsistencies == '' or inconsistencies == undefined">
+    <div class="form-group" ng-hide="inconsistencies == '' || inconsistencies == undefined">
       <b>Iconsistencies:</b> {{inconsistencies.length}}
     </div>
     <div class="form-group" ng-hide="processed.length == 0">
@@ -41,6 +41,11 @@
     <div class="form-group" ng-hide="downloaded.length == 0 || downloaded == undefined">
       <ul class="list-group"><b>Downloaded ({{downloaded.length}}):</b>
         <li class="list-group-item" ng-repeat="p in downloaded">{{ p }}</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="errors.length == 0 || errors == undefined">
+      <ul class="list-group"><b>Errors ({{errors.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in errors">{{ p.message }} ({{ p.code }})</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="task_id == ''">

@@ -76,6 +76,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
           $scope.not_found_on_vt = task_data["not_found_on_vt"];
           $scope.not_found_for_processing = task_data["not_found_for_processing"];
           $scope.inconsistencies = task_data["inconsistencies"];
+          $scope.errors = task_data["errors"];
   };
 
   $scope.check_if_finished = function(has_finished){
