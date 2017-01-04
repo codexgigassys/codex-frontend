@@ -30,6 +30,7 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
         try{
           process_task_data(response.data);
           if(first_time){
+              // To fill form with the requested data.
               $scope.sha1 = response.data['requested']['file_hash'];
               $scope.vt_av = response.data['requested']['vt_av'];
               $scope.vt_samples = response.data['requested']['vt_samples'];
@@ -72,6 +73,9 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
           $scope.date_end = task_data["date_end"];
           $scope.date_enqueued = task_data["date_enqueued"];
           $scope.hashes = task_data["hashes"];
+          $scope.not_found_on_vt = task_data["not_found_on_vt"];
+          $scope.not_found_for_processing = task_data["not_found_for_processing"];
+          $scope.inconsistencies = task_data["inconsistencies"];
   };
 
   $scope.check_if_finished = function(has_finished){

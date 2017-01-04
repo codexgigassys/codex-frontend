@@ -20,14 +20,22 @@
     <div class="form-group" ng-hide="hashes == ''">
       <b>Hashes:</b> {{hashes.length}}
     </div>
+    <div class="form-group" ng-hide="inconsistencies == '' or inconsistencies == undefined">
+      <b>Iconsistencies:</b> {{inconsistencies.length}}
+    </div>
     <div class="form-group" ng-hide="processed.length == 0">
       <ul class="list-group"><b>Processed ({{processed.length}}):</b>
         <li class="list-group-item" ng-repeat="p in processed">{{ p.hash }} ({{p.seconds}} seconds)</li>
       </ul>
     </div>
-    <div class="form-group" ng-hide="not_found.length == 0 || not_found == undefined">
-      <ul class="list-group"><b>Not found ({{not_found.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in not_found">{{ p }}</li>
+    <div class="form-group" ng-hide="not_found_on_vt.length == 0 || not_found_on_vt == undefined">
+      <ul class="list-group"><b>Not found on VT ({{not_found_on_vt.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in not_found_on_vt">{{ p }}</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="not_found_for_processing.length == 0 || not_found_for_processing == undefined">
+      <ul class="list-group"><b>Samples not found for processing ({{not_found_for_processing.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in not_found_for_processing">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="downloaded.length == 0 || downloaded == undefined">
