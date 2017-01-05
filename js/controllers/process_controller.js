@@ -77,6 +77,8 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
           $scope.not_found_for_processing = task_data["not_found_for_processing"];
           $scope.inconsistencies = task_data["inconsistencies"];
           $scope.errors = task_data["errors"];
+          $scope.duplicated_samples = task_data["duplicated_samples"];
+          $scope.duplicated_hashes = task_data["duplicated_hashes"];
   };
 
   $scope.check_if_finished = function(has_finished){

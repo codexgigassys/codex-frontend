@@ -14,16 +14,25 @@
     <div class="form-group" ng-hide="date_end == ''">
       <b>Date end:</b> {{date_end}}
     </div>
-    <div class="form-group" ng-hide="document_name_r == ''">
+    <div class="form-group" ng-hide="document_name_r == '' || document_name_r == undefined">
       <b>Document name:</b> {{document_name_r}}
     </div>
-    <div class="form-group" ng-hide="hashes == ''">
-      <b>Hashes:</b> {{hashes.length}}
+    <div class="form-group" ng-hide="hashes == '' || hashes == undefined">
+      <b>Total valid input hashes:</b> {{hashes.length + duplicated_samples.length + duplicated_hashes.length}}
+    </div>
+    <div class="form-group" ng-hide="hashes == ''|| hashes == undefined">
+      <b>Total valid unique hashes:</b> {{hashes.length + duplicated_samples.length}}
+    </div>
+    <div class="form-group" ng-hide="hashes == '' || hashes == undefined">
+      <b>Total valid (probably) unique samples:</b> {{hashes.length}}
+    </div>
+    <div class="form-group" ng-hide="errors == '' || errors == undefined">
+      <b>Total errors:</b> {{errors.length}}
     </div>
     <div class="form-group" ng-hide="inconsistencies == '' || inconsistencies == undefined">
       <b>Iconsistencies:</b> {{inconsistencies.length}}
     </div>
-    <div class="form-group" ng-hide="processed.length == 0">
+    <div class="form-group" ng-hide="processed.length == 0 || processed == undefined">
       <ul class="list-group"><b>Processed ({{processed.length}}):</b>
         <li class="list-group-item" ng-repeat="p in processed">{{ p.hash }} ({{p.seconds}} seconds)</li>
       </ul>
@@ -45,7 +54,17 @@
     </div>
     <div class="form-group" ng-hide="errors.length == 0 || errors == undefined">
       <ul class="list-group"><b>Errors ({{errors.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in errors">{{ p.message }} ({{ p.code }})</li>
+        <li class="list-group-item" ng-repeat="p in errors track by $index">{{ p.message }} ({{ p.code }})</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="duplicated_hashes.length == 0 || duplicated_hashes == undefined">
+      <ul class="list-group"><b>Duplicated hashes ({{duplicated_hashes.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in duplicated_hashes track by $index">{{ p }})</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="duplicated_samples.length == 0 || duplicated_samples == undefined">
+      <ul class="list-group"><b>Duplicated samples ({{duplicated_samples.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in duplicated_samples track by $index">{{ p }})</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="task_id == ''">
