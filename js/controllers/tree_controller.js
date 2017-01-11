@@ -334,6 +334,8 @@ angular.module("myApp").controller("TreeController", ['$scope','$http','$interva
   $scope.count_status="(loading...)";
   $scope.count="";
   $scope.count_tasks="";
+  $scope.av_count="";
+  $scope.av_count_status="..."
   $http.get("http://"+backendIp+"/api/v1/queue_count").then(function(response){
     var tmp_response = response.data;
     $scope.count_tasks = tmp_response["count"];
@@ -346,6 +348,11 @@ angular.module("myApp").controller("TreeController", ['$scope','$http','$interva
     var tmp_response = response.data;
     $scope.count = tmp_response["count"];
     $scope.count_status = "";
+  });
+  $http.get("http://"+backendIp+"/api/v1/av_count").then(function(response){
+    var tmp_response = response.data;
+    $scope.av_count = tmp_response["count"];
+    $scope.av_count_status = "";
   });
   $interval(function(){$http.get("http://"+backendIp+"/api/v1/samples").then(function(response){
     var tmp_response = response.data;
