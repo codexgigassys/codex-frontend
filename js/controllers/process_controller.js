@@ -45,6 +45,18 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
       });
   };
 
+  calcDiff = function(firstDate, secondDate){
+	  if(firstDate == undefined || secondDate == undefined){
+        return "";
+	  }
+	  if(typeof(firstDate) == "string"){
+		  firstDate = new Date(firstDate);
+		  secondDate = new Date(secondDate);
+	  }
+	  var diffSeconds = Math.round(Math.abs((firstDate - secondDate)/1000));
+	  return diffSeconds;
+  }
+
 
   $scope.process_file = function(){
     $scope.process_response="Processing hashes..."
@@ -79,6 +91,22 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
           $scope.errors = task_data["errors"];
           $scope.duplicated_samples = task_data["duplicated_samples"];
           $scope.duplicated_hashes = task_data["duplicated_hashes"];
+          $scope.vt_av_added = task_data["vt_av_added"];
+          $scope.vt_av_out_of_credits = task_data["vt_av_out_of_credits"];
+          $scope.not_found_on_vt_av = task_data["not_found_on_vt_av"];
+          $scope.vt_av_already_downloaded = task_data["vt_av_already_downloaded"];
+          $scope.private_credits_spent = task_data["private_credits_spent"];
+          $scope.public_credits_spent = task_data["public_credits_spent"];
+	      $scope.queue_time = calcDiff(task_data["date_enqueued"],task_data["date_start"]);
+	      $scope.task_time = calcDiff(task_data["date_start"],task_data["date_end"]);
+	      $scope.total_time = calcDiff(task_data["date_enqueued"],task_data["date_end"]);
+console.log("queue_time=");
+console.log($scope.queue_time);
+console.log("task_time=");
+console.log($scope.task_time);
+console.log("total_time=");
+console.log($scope.total_time);
+
   };
 
   $scope.check_if_finished = function(has_finished){
@@ -106,7 +134,6 @@ angular.module("myApp").controller("ProcessController",['$scope','$http','backen
 
 
   };
-
 
 
 }]);

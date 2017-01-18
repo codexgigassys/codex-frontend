@@ -14,6 +14,15 @@
     <div class="form-group" ng-hide="date_end == ''">
       <b>Date end:</b> {{date_end}}
     </div>
+    <div class="form-group" ng-hide="date_start == '' || queue_time == ''">
+      <b>Queue time:</b> {{queue_time | readableTime}}
+    </div>
+    <div class="form-group" ng-hide="date_end == '' || task_time == ''">
+      <b>Task time:</b> {{task_time | readableTime}}
+    </div>
+    <div class="form-group" ng-hide="date_end == '' || total_time == ''">
+      <b>Total time:</b> {{total_time | readableTime}}
+    </div>
     <div class="form-group" ng-hide="document_name_r == '' || document_name_r == undefined">
       <b>Document name:</b> {{document_name_r}}
     </div>
@@ -28,6 +37,12 @@
     </div>
     <div class="form-group" ng-hide="errors == '' || errors == undefined">
       <b>Total errors:</b> {{errors.length}}
+    </div>
+    <div class="form-group" ng-hide="private_credits_spent == 0 || private_credits_spent == undefined || private_credits_spent ==''">
+      <b>Private credits spent:</b> {{private_credits_spent}}
+    </div>
+    <div class="form-group" ng-hide="public_credits_spent == 0 || public_credits_spent == undefined || public_credits_spent ==''">
+      <b>Public credits spent:</b> {{public_credits_spent}}
     </div>
     <div class="form-group" ng-hide="inconsistencies == '' || inconsistencies == undefined">
       <b>Iconsistencies:</b> {{inconsistencies.length}}
@@ -65,6 +80,26 @@
     <div class="form-group" ng-hide="duplicated_samples.length == 0 || duplicated_samples == undefined">
       <ul class="list-group"><b>Duplicated samples ({{duplicated_samples.length}}):</b>
         <li class="list-group-item" ng-repeat="p in duplicated_samples track by $index">{{ p }})</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="vt_av_added.length == 0 || vt_av_added == undefined">
+      <ul class="list-group"><b>New Antivirus scans from Virus Total downloaded ({{vt_av_added.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in vt_av_added track by $index">{{ p }})</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="vt_av_out_of_credits.length == 0 || vt_av_out_of_credits == undefined">
+      <ul class="list-group"><b>Antivirus scans that failed to download from Virus Total (out of credits (should be zero)) ({{vt_av_out_of_credits.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in vt_av_out_of_credits track by $index">{{ p }})</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="not_found_on_vt_av.length == 0 || not_found_on_vt_av == undefined">
+      <ul class="list-group"><b>Hashes not found when trying to download Antivirus scans from Virus Total ({{not_found_on_vt_av.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in not_found_on_vt_av track by $index">{{ p }})</li>
+      </ul>
+    </div>
+    <div class="form-group" ng-hide="vt_av_already_downloaded.length == 0 || vt_av_already_downloaded == undefined">
+      <ul class="list-group"><b>Antivirus scans that were already present on Codex ({{vt_av_already_downloaded.length}}):</b>
+        <li class="list-group-item" ng-repeat="p in vt_av_already_downloaded track by $index">{{ p }})</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="task_id == ''">

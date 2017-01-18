@@ -1,4 +1,4 @@
-angular.module("myApp", ['ui.router','angular-json-tree','ngFileUpload','smart-table', 'ui.select', 'ngSanitize','ang-drag-drop','angular-clipboard','angular-charthelper']);
+angular.module("myApp", ['ui.router','angular-json-tree','ngFileUpload','smart-table', 'ui.select', 'ngSanitize','ang-drag-drop','angular-clipboard','angular-charthelper','readableTime']);
 if(typeof backend_ip === 'undefined' || typeof backend_port === 'undefined'){
   angular.module("myApp").value('backendIp', '127.0.0.1:4500');//default. Edit ip.js for custom backend ip:port
 }else{
