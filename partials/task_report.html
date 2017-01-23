@@ -74,32 +74,32 @@
     </div>
     <div class="form-group" ng-hide="duplicated_hashes.length == 0 || duplicated_hashes == undefined">
       <ul class="list-group"><b>Duplicated hashes ({{duplicated_hashes.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in duplicated_hashes track by $index">{{ p }})</li>
+        <li class="list-group-item" ng-repeat="p in duplicated_hashes track by $index">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="duplicated_samples.length == 0 || duplicated_samples == undefined">
       <ul class="list-group"><b>Duplicated samples ({{duplicated_samples.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in duplicated_samples track by $index">{{ p }})</li>
+        <li class="list-group-item" ng-repeat="p in duplicated_samples track by $index">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="vt_av_added.length == 0 || vt_av_added == undefined">
       <ul class="list-group"><b>New Antivirus scans from Virus Total downloaded ({{vt_av_added.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in vt_av_added track by $index">{{ p }})</li>
+        <li class="list-group-item" ng-repeat="p in vt_av_added track by $index">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="vt_av_out_of_credits.length == 0 || vt_av_out_of_credits == undefined">
       <ul class="list-group"><b>Antivirus scans that failed to download from Virus Total (out of credits (should be zero)) ({{vt_av_out_of_credits.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in vt_av_out_of_credits track by $index">{{ p }})</li>
+        <li class="list-group-item" ng-repeat="p in vt_av_out_of_credits track by $index">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="not_found_on_vt_av.length == 0 || not_found_on_vt_av == undefined">
       <ul class="list-group"><b>Hashes not found when trying to download Antivirus scans from Virus Total ({{not_found_on_vt_av.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in not_found_on_vt_av track by $index">{{ p }})</li>
+        <li class="list-group-item" ng-repeat="p in not_found_on_vt_av track by $index">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="vt_av_already_downloaded.length == 0 || vt_av_already_downloaded == undefined">
       <ul class="list-group"><b>Antivirus scans that were already present on Codex ({{vt_av_already_downloaded.length}}):</b>
-        <li class="list-group-item" ng-repeat="p in vt_av_already_downloaded track by $index">{{ p }})</li>
+        <li class="list-group-item" ng-repeat="p in vt_av_already_downloaded track by $index">{{ p }}</li>
       </ul>
     </div>
     <div class="form-group" ng-hide="task_id == ''">
