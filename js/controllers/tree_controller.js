@@ -32,6 +32,30 @@ angular.module("myApp").controller("TreeController", ['$scope','$http','$interva
 
     };
 
+	valid_hash = function(str){
+		return ((str.match('[a-fA-F0-9]{40}') !== null && str.length === 40) ||
+				(str.match('[a-fA-F0-9]{32}') !== null && str.length === 32) ||
+				(str.match('[a-fA-F0-9]{64}') !== null && str.length === 64))
+	};
+
+	$scope.validate_hash = function(str,form_id){
+		if(! valid_hash(str.trim())){
+			$('#formgroup-'+form_id).addClass("has-error");
+			$('#input-'+form_id).css("background-color","#fef5f1");
+		}else{
+			$('#formgroup-'+form_id).removeClass("has-error");
+			$('#input-'+form_id).css("background-color","white");
+		}
+	};
+
+    $scope.call_func = function(api_func,str,form_id){
+        if(api_func == 'check_lib' || api_func == 'check_imp'){
+            $scope.check_libimp(api_func,str,form_id);
+        }else if(api_func == 'validate_hash'){
+            $scope.validate_hash(str,form_id);
+        }
+
+    };
 
     $scope.check_libimp = function(api_func,str,form_id){
         form_id=$scope.replace_dot_with_hyphen(form_id);

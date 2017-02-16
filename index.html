@@ -109,7 +109,7 @@
                   <div class="form-group" id="formgroup-{{replace_dot_with_hyphen(item.id)}}">
                     <label class="col-md-4 control-label col-sm-3 col-xs-12">{{item.name}}: </label>
                     <div class="col-md-6 col-sm-8 col-xs-11">
-                      <input class="{{select_input_class(item)}}" type="{{item.type}}" name="{{item.id}}" placeholder="{{item.example}}" ng-model="formData[item.id]" data-test="{{item.call}}" ng-blur="lowercase(item.lower,replace_dot_with_hyphen(item.id))" ng-keyup="check_libimp(item.call_func,formData[item.id],item.id)" id="input-{{replace_dot_with_hyphen(item.id)}}">
+                      <input class="{{select_input_class(item)}}" type="{{item.type}}" name="{{item.id}}" placeholder="{{item.example}}" ng-model="formData[item.id]" data-test="{{item.call}}" ng-blur="lowercase(item.lower,replace_dot_with_hyphen(item.id))" ng-keyup="call_func(item.call_func,formData[item.id],item.id)" id="input-{{replace_dot_with_hyphen(item.id)}}">
                     </div>
                     <div class="col-md-2 col-sm-1 col-xs-1" style="padding-top: 8px; padding-left: 0">
                       <a href="#" ng-if="item.multi == true" ng-click="add_the_same_item(item.id)">
