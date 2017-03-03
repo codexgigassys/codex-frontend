@@ -1,0 +1,24 @@
+<h1>
+  Tasks on queue
+  <button type="button" ng-click="refresh_tasks_on_queue()" class="btn btn-default">{{refresh_status}}
+    <span class="glyphicon glyphicon-refresh"></span>
+  </button>
+</h1>
+<ul>
+  <div ng-repeat="queue in queues">
+    <li>
+      {{queue.queue_name}}: 
+      <ul>
+        <div ng-repeat="task in queue.tasks">
+          <li>
+            <a href="#/process/{{task.task_id}}">{{task.task_id}}</a> ({{get_time_on_queue(task.date_enqueued) | readableTime}})
+          </li>
+        </div>
+      </ul>
+    </li>
+  </div>
+</ul>
+<p ng-if="queues.length === 0">
+No logs
+</p>
+<hr />

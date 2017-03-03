@@ -38,4 +38,9 @@ angular.module("myApp").config(function($stateProvider, $urlRouterProvider) {
     templateUrl: "partials/load.html",
     controller: "LoadController"
   })
+  .state('tasks_on_queue',{
+    url: "/tasks_on_queue",
+    templateUrl: "partials/tasks_on_queue.html",
+    controller: "TasksOnQueueController"
+  })
 });
