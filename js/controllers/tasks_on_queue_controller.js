@@ -16,6 +16,8 @@ angular.module("myApp").controller("TasksOnQueueController",['$scope','$http','b
     $http({method: 'GET',url: "http://"+backendIp+"/api/v1/queue_tasks"}).then(function(response){
       try{
         $scope.queues = response.data["queue_tasks"];
+        $scope.total_tasks = count_tasks(response.data["queue_tasks"]);
+        $scope.total_hashes = count_hashes(response.data["queue_tasks"]);
         $scope.current_date = response.data["current_date"];
         $scope.refresh_status ="";
       }
@@ -24,6 +26,23 @@ angular.module("myApp").controller("TasksOnQueueController",['$scope','$http','b
       }
     });
   };
+
+  count_tasks = function(queues){
+      var total=0;
+      for(var x = 0;x<queues.length;x++){
+          total+=queues[x].tasks.length;
+      }
+      return total;
+  }
+  count_hashes = function(queues){
+      var total=0;
+      for(var x=0;x<queues.length;x++){
+          for(var y=0;y<queues[x].tasks.length;y++){
+              total+=queues[x].tasks[y].hashes;
+          }
+      }
+      return total;
+  }
   //Reqeust logs at least one time.
   $scope.refresh_tasks_on_queue();
   //ToDo: dup function 
